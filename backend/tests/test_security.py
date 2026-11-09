@@ -75,11 +75,14 @@ def test_idempotency_key_prevents_duplicate_submission(client):
     types = {t["code"]: t for t in client.get("/api/application-types", headers=h).json()["types"]}
     docs = {i["doc_code"]: upload(client, h) for i in types["BANK_DETAILS_CHANGE"]["checklist"] if i["mandatory"]}
     body = {"application_type": "BANK_DETAILS_CHANGE", "documents": docs}
-    hk = {**h, "Idempotency-Key": "test-key-001"}
+    hk = {**h, "Idempotency-Key": "test-key-001", "Origin": "https://arjunrohan.github.io"}
     r1 = client.post("/api/applications", headers=hk, json=body)
     r2 = client.post("/api/applications", headers=hk, json=body)
     assert r1.status_code == 200 and r2.json()["id"] == r1.json()["id"]
     assert r2.headers.get("Idempotent-Replay") == "true"
+    assert r1.headers['access-control-allow-origin'] == 'https://arjunrohan.github.io'
+    assert r2.headers['access-control-allow-origin'] == 'https://arjunrohan.github.io'
+    assert 'Idempotent-Replay' in r2.headers['access-control-expose-headers']
 
 
 def test_optimistic_locking_rejects_stale_action(client):

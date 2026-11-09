@@ -61,11 +61,6 @@ async def lifespan(_: FastAPI):
 
 
 app = FastAPI(title="Vishwas Setu — AICTE Approval Workflow & Compliance Monitoring", version="0.2.0", lifespan=lifespan)
-app.add_middleware(CORSMiddleware,
-                   allow_origins=[origin.strip() for origin in os.environ.get(
-                       "CORS_ORIGINS", "http://localhost:5173,https://arjunrohan.github.io").split(",") if origin.strip()],
-                   allow_methods=["*"], allow_headers=["*"],
-                   expose_headers=["X-Request-ID", "Idempotent-Replay"])
 
 
 def _user_id_from(request: Request) -> int | None:
@@ -114,6 +109,14 @@ async def idempotency_and_request_id(request: Request, call_next):
     finally:
         audit.request_id_var.reset(token)
 
+
+# CORS must wrap the idempotency middleware so its early replay responses are
+# readable by the separately hosted frontend too.
+app.add_middleware(CORSMiddleware,
+                   allow_origins=[origin.strip() for origin in os.environ.get(
+                       "CORS_ORIGINS", "http://localhost:5173,https://arjunrohan.github.io").split(",") if origin.strip()],
+                   allow_methods=["*"], allow_headers=["*"],
+                   expose_headers=["X-Request-ID", "Idempotent-Replay"])
 
 app.include_router(router, prefix="/api")
 app.include_router(router, prefix="/api/v1", include_in_schema=False)
