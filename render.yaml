@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: vishwas-setu-api
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: DEMO_MODE
+        value: "1"
+      - key: AUTO_SEED
+        value: "1"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: https://arjunrohan.github.io
+      - key: DATABASE_URL
+        value: sqlite:////data/aicte_flow.db
+      - key: STORAGE_DIR
+        value: /data/storage

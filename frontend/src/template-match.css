@@ -1,0 +1,121 @@
+/* Duralux template measurements, loaded after dashboard-theme.css.
+   Values were read from the live template (computed styles at 1440px).
+   Layout rules apply on desktop only, so the tablet and mobile rules in
+   dashboard-theme.css keep working. */
+
+:root {
+  font-size: 13.44px;
+  --ink: #283c50;
+  --ink-2: #6b7885;
+  --muted: #64748b;
+  --line: #e5e7eb;
+  --line-2: #dcdee4;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* ---- type scale ---- */
+.page-head h1 { font-size: 16px; font-weight: 600; line-height: 19.2px; letter-spacing: 0; }
+.card-head h2, .card-head h3 { font-size: 16px; font-weight: 700; line-height: 19.2px; }
+.crumbs { font-size: 13px; margin-top: 0; }
+.sidenav-caption { font-size: 10px; letter-spacing: 0.7px; }
+.field label { font-size: 12px; font-weight: 600; color: var(--ink); }
+.small { font-size: 12px; }
+.stat-value { font-size: 20.4px; letter-spacing: 0; }
+.stat-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-top: 0; }
+.stat-icon { background: var(--hover); border-style: solid; border-color: var(--line-2); }
+.footbar { font-size: 10px; }
+
+/* ---- sidebar ---- */
+.sidelink { padding: 10px 15px; gap: 12px; border-radius: 5px; }
+.sidelink .icon { width: 18px; height: 18px; color: var(--ink); }
+.sidelink.active { background: #eaebef; color: #001327; }
+.sidebar-card { background: #eaebef; border: 0; }
+
+/* ---- header ---- */
+.topsearch { background: #fff; border-color: var(--line); }
+.avatar { border: 0; box-shadow: none; }
+
+/* ---- cards, tables, badges ---- */
+.card, .stat, .kpi { border-color: var(--line); box-shadow: var(--shadow); border-radius: var(--radius); }
+.card > .card-head, .card-head.pad { padding: 22px 25px; }
+.card-body, .stat { padding: 25px; }
+.table th { background: #f8f9fa; color: var(--ink); font-size: 10px; letter-spacing: 0.3px; padding-block: 8px; line-height: 16px; }
+.table td { padding-block: 15px; font-size: 13.44px; }
+.table.compact td { padding-block: 10px; }
+.table .mono { font-size: 13px; }
+.badge { padding: 5px 6px; font-size: 11px; line-height: 11px; border-radius: 3px; }
+
+/* ---- buttons and inputs ---- */
+.btn { min-height: 0; padding: 12px 16px; font-size: 10px; border-radius: 3px; }
+.btn.primary { box-shadow: none; }
+.btn.small { min-height: 0; padding: 8px 12px; font-size: 9px; }
+.btn.ghost { border-color: var(--line-2); }
+.card-toolbar input:not([type=checkbox]):not([type=radio]):not([type=file]), .card-toolbar select { min-height: 40px; }
+.toolbar-search input { min-height: 0 !important; }
+.select-sm { min-height: 40px; }
+input::placeholder, textarea::placeholder { color: #91a1b6; }
+
+/* ---- tab strip (template nav-tabs-custom-style) ---- */
+.tabs { gap: 0; padding: 0; border-radius: var(--radius); border: 1px solid var(--line); box-shadow: var(--shadow); align-items: stretch; }
+.tabs button { padding: 18px 25px; font-size: 13.44px; font-weight: 600; min-height: 0; }
+.modal { border-radius: 10px; }
+.modal-head { padding: 20px 25px; }
+.modal-body { padding: 22px 25px 25px; }
+
+/* ---- reports: your per-report icons, template sizing ---- */
+.report-icon { width: 42px; height: 42px; border-radius: 50%; background: var(--hover); border-color: var(--line-2); color: var(--ink); }
+.card.report { gap: 12px; padding: 25px; }
+
+/* ---- sign-in: template "login cover" proportions on desktop ---- */
+.auth-features summary { color: var(--ink); }
+.auth-card .auth-sub { font-size: 13.44px; font-weight: 700; color: var(--ink); margin: 0 0 6px; }
+.auth-card > p.muted { font-size: 12px; margin: 0 0 22px; }
+.auth-card h2 { font-size: 20px; letter-spacing: 0; margin-bottom: 14px; }
+
+@media (min-width: 1001px) {
+  .app { grid-template-columns: 280px minmax(0, 1fr); }
+  .app.collapsed { grid-template-columns: 80px minmax(0, 1fr); }
+  .logo { padding: 15px 30px; }
+  .sidenav { padding: 0 15px 16px; }
+  .sidenav-caption { padding: 15px 5px 10px; }
+  .sidelink { height: 38px; margin: 3px 0; }
+  .sidebar-card { margin: 0 15px 20px; }
+  .topbar { min-height: 80px; padding: 0 30px; flex-wrap: nowrap; }
+  .content { padding: 30px 30px 40px; }
+  .page-head { margin: -30px -30px 30px; padding: 12px 30px; min-height: 65px; }
+  .auth { grid-template-columns: minmax(0, 1fr) 560px; }
+  .auth-form { background: #fff; border-left: 1px solid var(--line); padding: 64px 56px; align-items: flex-start; }
+  .auth-card { max-width: none; padding: 0; border: 0; box-shadow: none; background: transparent; }
+}
+@media (min-width: 1001px) and (min-height: 760px) { .demo-account-scroll { max-height: calc(100vh - 470px); } }
+
+/* ---- sign-in: blue cover panel (restored) ---- */
+.auth-cover { background: var(--primary); color: rgba(255, 255, 255, 0.88); position: relative; overflow: hidden; }
+.auth-cover::after { content: ""; display: block; position: absolute; right: -120px; bottom: -160px; width: 460px; height: 460px; border-radius: 50%; border: 60px solid rgba(255, 255, 255, 0.06); pointer-events: none; }
+.auth-cover h1, .auth-cover-body h1 { color: #fff; }
+.auth-cover-body > p { color: rgba(255, 255, 255, 0.85); }
+.auth-cover .logo.light, .auth-cover .logo.light .logo-text strong { color: #fff; }
+.auth-cover .logo.light .logo-text small { color: rgba(255, 255, 255, 0.7); }
+.auth-features summary { color: #fff; }
+.auth-points, .auth-points li { color: rgba(255, 255, 255, 0.85); }
+.auth-points strong { color: #fff; }
+.auth-point-icon { background: rgba(255, 255, 255, 0.14); border: 0; box-shadow: none; color: #fff; }
+.auth-foot { color: rgba(255, 255, 255, 0.75); position: relative; z-index: 1; }
+
+/* ---- demo accounts: pick a role, see its accounts; no inner scrolling ---- */
+.demo-picker { display: flex; align-items: center; gap: 12px; margin: 14px 0 12px; }
+.demo-picker label { font-size: 12px; font-weight: 600; color: var(--ink); }
+.demo-picker select { flex: 1; min-height: 40px !important; padding-top: 9px; padding-bottom: 9px; font-size: 13px; }
+.demo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.demo-grid .demo-user { width: 100%; min-width: 0; padding: 9px 12px; }
+.demo-grid .demo-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.demo-grid .demo-region { font-size: 11.5px; }
+@media (max-width: 480px) { .demo-grid { grid-template-columns: 1fr; } }
+
+/* ---- sign-in: left panel stays centred, but scrolls when "How Vishwas Setu helps" is opened ---- */
+.auth-cover { overflow-x: hidden; overflow-y: auto; justify-content: flex-start; }
+.auth-cover > :first-child { margin-top: auto; }
+.auth-cover > :last-child { margin-bottom: auto; }
+.auth-cover::after { position: fixed; left: calc(50vw - 560px - 120px); right: auto; }
+@media (max-width: 1000px) { .auth-cover::after { position: absolute; left: auto; right: -120px; } }

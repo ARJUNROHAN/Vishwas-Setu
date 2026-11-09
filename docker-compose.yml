@@ -1,0 +1,28 @@
+# PostgreSQL + app. For a zero-setup SQLite run, use: docker build -t vishwas-setu . && docker run -p 8000:8000 vishwas-setu
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: aicte
+      POSTGRES_PASSWORD: aicte-dev-only
+      POSTGRES_DB: aicte_flow
+    volumes: ["pg:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aicte -d aicte_flow"]
+      interval: 3s
+      retries: 20
+  app:
+    build: .
+    depends_on:
+      db: { condition: service_healthy }
+    ports: ["8000:8000"]
+    environment:
+      DATABASE_URL: postgresql+psycopg://aicte:aicte-dev-only@db:5432/aicte_flow
+      DEMO_MODE: "1"          # simulated clock and demo sign-in list; set "0" in production
+      JWT_SECRET: change-me-in-production
+      STORAGE_DIR: /data/storage
+    volumes: ["files:/data"]
+    command: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+volumes:
+  pg:
+  files:

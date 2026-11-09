@@ -1,0 +1,13 @@
+node_modules/
+frontend/dist/
+__pycache__/
+*.db
+*.db-*
+backend/storage/
+.pytest_cache/
+.env
+.env.*
+!.env.example
+.deployment/
+frontend/test-results/
+frontend/playwright-report/

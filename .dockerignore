@@ -1,0 +1,11 @@
+.git
+.deployment
+**/node_modules
+frontend/dist
+**/__pycache__
+**/.pytest_cache
+**/*.db
+**/*.db-*
+backend/storage
+**/.env
+**/.env.*
